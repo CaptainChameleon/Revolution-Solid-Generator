@@ -66,17 +66,34 @@ class RevolutionSolid {
   RevolutionSolid(Profile profile) {
     solidShape = createShape();
     solidShape.beginShape(TRIANGLE_STRIP);
-    solidShape.noFill();      
-    for(int i = 0; i < profile.vertices.size() - 1; i++) {
+    //solidShape.noFill();      
+    
+    /*
+    for(int i = 0; i < profile.vertices.size(); i++) {
        Vertex vertex1 = profile.vertices.get(i);
-       Vertex vertex2 = profile.vertices.get(i+1);
-       for(int j = 1; j < meridianNum + 1; j++) {
-         float rotationAngle = radians(360/meridianNum*j);
+       Vertex vertex2;
+       if (i+1 == profile.vertices.size()) {
+          vertex2 = profile.vertices.get(0);
+       } else {
+         vertex2 = profile.vertices.get(i+1);
+       }
+       for(int j = 1; j < meridians + 1; j++) {
+         float rotationAngle = radians(360/meridians*j);
          solidShape.vertex((vertex1.x - width/2) * cos(rotationAngle), vertex1.y, (vertex1.x - width/2) * sin(rotationAngle));
          solidShape.vertex((vertex2.x - width/2) * cos(rotationAngle), vertex2.y, (vertex2.x - width/2) * sin(rotationAngle));
        }
     }
-    solidShape.endShape();
+    */
+    
+    for(int i = 0; i < profile.vertices.size(); i++) {
+       Vertex vertex = profile.vertices.get(i);
+       for(int j = 0; j <= meridians; j++) {
+         float rotationAngle = radians(ceil(360/meridians)*j);
+         solidShape.vertex((vertex.x - width/2) * cos(rotationAngle), vertex.y, (vertex.x - width/2) * sin(rotationAngle));
+       }
+    }
+    
+    solidShape.endShape(CLOSE);
   }
   
   void display(){
