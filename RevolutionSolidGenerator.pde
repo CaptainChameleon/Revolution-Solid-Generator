@@ -36,8 +36,8 @@ void draw() {
     pointLight(255, 255, 255, -width/2, -height/2, 0); 
     scale(zoom);
     pushMatrix();
-    rotateX(0.03 * mouseY);
-    rotateY(0.03 * mouseX);
+    rotateX(0.03 * (mouseY - height/2));
+    rotateY(0.03 * (mouseX - width/2));
     currentSolid.display();
     popMatrix();
     break;
